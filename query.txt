@@ -1,0 +1,24 @@
+SELECT
+  orders.Date,
+  prod_cat.CategoryName,
+  products.ProdName,
+  products.Price,
+  orders.Quantity,
+  (Quantity * Price) as Sales,
+  customers.CustomerEmail,
+  customers.CustomerCity
+FROM
+  VIX3.Order AS orders
+LEFT JOIN
+  VIX3.Customer AS customers
+ON
+  orders.CustomerID = customers.CustomerID
+LEFT JOIN
+  VIX3.Product AS products
+ON
+  orders.ProdNumber = products.ProdNumber
+LEFT JOIN
+  `VIX3.ProductCategory` AS prod_cat
+ON
+  prod_cat.CategoryID = products.Category
+ORDER BY orders.Date asc
